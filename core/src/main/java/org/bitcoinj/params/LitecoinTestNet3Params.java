@@ -40,7 +40,8 @@ public class LitecoinTestNet3Params extends AbstractBitcoinNetParams {
         genesisBlock.setNonce(3562614017L);
 
         String genesisHash = genesisBlock.getHashAsString();
-        checkState(genesisHash.equals("000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"),
+//        checkState(genesisHash.equals("000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"),
+        checkState(genesisHash.equals("d48328b4ad9c737fbf9bdab1c0494d98e7da3e2f0cc49723387b3438c58126c5"),
                 genesisHash);
 
         majorityEnforceBlockUpgrade = TESTNET_MAJORITY_ENFORCE_BLOCK_UPGRADE;
