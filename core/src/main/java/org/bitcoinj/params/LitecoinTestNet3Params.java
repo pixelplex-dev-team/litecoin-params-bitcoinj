@@ -11,47 +11,41 @@ import static com.google.common.base.Preconditions.checkState;
  * relaxed rules suitable for development and testing of applications and new
  * Litecoin versions.
  */
-public class LitecoinTestNet3Params extends AbstractLitecoinParams {
-    public static final int TESTNET_MAJORITY_WINDOW = 100;
-    public static final int TESTNET_MAJORITY_REJECT_BLOCK_OUTDATED = 75;
-    public static final int TESTNET_MAJORITY_ENFORCE_BLOCK_UPGRADE = 51;
+public class LitecoinTestNet3Params extends AbstractBitcoinNetParams {
+    public static final int TESTNET_MAJORITY_WINDOW = 1000;
+    public static final int TESTNET_MAJORITY_REJECT_BLOCK_OUTDATED = 950;
+    public static final int TESTNET_MAJORITY_ENFORCE_BLOCK_UPGRADE = 750;
 
     public LitecoinTestNet3Params() {
         super();
         id = ID_LITECOIN_TESTNET;
-        // Genesis hash is ed60044f49d5e62ac5403ca26e24ae5666f03eb034b4f41cf20e976266bf99b4
-        packetMagic = 0xfcc1b7dc;
+        interval = INTERVAL;
+        targetTimespan = TARGET_TIMESPAN;
+        maxTarget = Utils.decodeCompactBits(0x1d00ffffL);
 
-        maxTarget = Utils.decodeCompactBits(0x1e0fffffL);
-        port = 19333;
+        dumpedPrivateKeyHeader = 239;
         addressHeader = 111;
         p2shHeader = 196;
         acceptableAddressCodes = new int[]{addressHeader, p2shHeader};
-        dumpedPrivateKeyHeader = 239;
+        port = 19333;
+        packetMagic = 0xf9beb4d9L;
+        bip32HeaderPub = 0x0488B21E; //The 4 byte header that serializes in base58 to "xpub".
+        bip32HeaderPriv = 0x0488ADE4; //The 4 byte header that serializes in base58 to "xprv"
 
-        spendableCoinbaseDepth = 30;
-        subsidyDecreaseBlockCount = 100000;
+        subsidyDecreaseBlockCount = 210000;
+        spendableCoinbaseDepth = 500;
 
-        genesisBlock.setTime(1317798646L);
-        genesisBlock.setDifficultyTarget(0x1e0ffff0L);
-        genesisBlock.setNonce(385270584);
+        genesisBlock.setTime(1320884152L);
+        genesisBlock.setDifficultyTarget(0x1d018ea7L);
+        genesisBlock.setNonce(3562614017L);
 
         String genesisHash = genesisBlock.getHashAsString();
-        checkState(genesisHash.equals("ed60044f49d5e62ac5403ca26e24ae5666f03eb034b4f41cf20e976266bf99b4"));
-        alertSigningKey = Hex.decode("0449623fc74489a947c4b15d579115591add020e53b3490bf47297dfa3762250625f8ecc2fb4fc59f69bdce8f7080f3167808276ed2c79d297054367566038aa82");
+        checkState(genesisHash.equals("000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"),
+                genesisHash);
 
         majorityEnforceBlockUpgrade = TESTNET_MAJORITY_ENFORCE_BLOCK_UPGRADE;
         majorityRejectBlockOutdated = TESTNET_MAJORITY_REJECT_BLOCK_OUTDATED;
         majorityWindow = TESTNET_MAJORITY_WINDOW;
-
-        dnsSeeds = new String[]{
-                "testnet-seed.litecointools.com",
-                "testnet-seed.ltc.xurious.com",
-                "dnsseed.wemine-testnet.com"
-        };
-
-        bip32HeaderPub = 0x043587CF;
-        bip32HeaderPriv = 0x04358394;
     }
 
     private static LitecoinTestNet3Params instance;
