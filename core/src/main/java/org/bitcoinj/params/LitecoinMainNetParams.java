@@ -20,7 +20,7 @@ public class LitecoinMainNetParams extends AbstractBitcoinNetParams {
         maxTarget = Utils.decodeCompactBits(0x1e0fffffL);
         port = 9333;
         addressHeader = 48;
-        p2shHeader = 5;
+        p2shHeader = 50;
         acceptableAddressCodes = new int[]{addressHeader, p2shHeader};
         dumpedPrivateKeyHeader = 176;
 
